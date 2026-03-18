@@ -559,18 +559,29 @@ async function initProductPage() {
 }
 
 function displayProduct(product) {
-  document.getElementById('product-title').textContent = product.name;
-  document.getElementById('product-price').textContent = product.price.toLocaleString('ru-RU') + ' ₽';
-  document.getElementById('seller-name').textContent = product.seller?.username || 'IVSHOP';
+  // Название товара
+  document.getElementById('product-title').textContent = product.name || 'Товар';
   
-  // Генерируем рандомный рейтинг для каждого товара
+  // Цена
+  document.getElementById('product-price').textContent = (product.price || 0).toLocaleString('ru-RU') + ' ₽';
+  
+  // Имя продавца - если есть seller, берем его username, иначе "IVSHOP"
+  const sellerName = product.seller?.username || 'IVSHOP';
+  document.getElementById('seller-name').textContent = sellerName;
+  
+  // Рейтинг продавца
   const rating = (Math.random() * 1 + 4).toFixed(1);
   const reviews = Math.floor(Math.random() * 300) + 50;
-  document.getElementById('seller-rating').innerHTML = `★★★★★ ${rating} (${reviews} отзывов)`;
+  document.getElementById('seller-rating').textContent = `★★★★★ ${rating} (${reviews} отзывов)`;
   
+  // Описание
   document.getElementById('product-description').textContent = product.description || 'Описание отсутствует';
+  
+  // Картинка
   if (product.image) {
     document.getElementById('product-image').style.backgroundImage = `url('${product.image}')`;
+  } else {
+    document.getElementById('product-image').style.backgroundImage = "url('img/default.jpg')";
   }
 }
 

@@ -20,18 +20,12 @@ module.exports = async (req, res) => {
 
         const { data, error } = await supabase
             .from('products')
-            .select('*, seller:users(id, username)')
+            .select(`
+                *,
+                seller:users(id, username)
+            `)
             .eq('id', id)
             .maybeSingle();
-
-        if (error) {
-            console.error('Product fetch error:', error);
-            return res.status(500).json({ error: 'Database error' });
-        }
-
-        if (!data) {
-            return res.status(404).json({ error: 'Product not found' });
-        }
 
         return res.status(200).json(data);
     } catch (err) {
