@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IVSHOP - Игровой маркетплейс</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="dark-theme">
+    <!-- Шапка -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-flex">
+                <a href="index.html" class="logo-link">
+                    <img src="img/logo.png" alt="IVSHOP" class="logo">
+                </a>
+                <div class="header-actions">
+                    <a href="balance.html" class="balance-link" id="header-balance">0 ₽</a>
+                    <a href="profile.html" class="user-profile">
+                    <i class="fas fa-user"></i>
+                </a>
+                <button id="theme-toggle" class="theme-btn">
+                <i class="fas fa-sun"></i>
+                </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>IVSHOP</h1>
+                    <div class="rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="reviews">1 отзыв</span>
+                    </div>
+                    <p class="tagline">Купите игры, аккаунты и подписки по лучшим ценам</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Категории -->
+        <section class="categories-section">
+            <div class="container">
+                <h2 class="section-title">Популярные категории</h2>
+                <div class="categories-grid">
+                    <a href="#games" class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <h3>Игры</h3>
+                        <span class="count">389 товаров</span>
+                    </a>
+                    
+                    <a href="#accounts" class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <h3>Аккаунты</h3>
+                        <span class="count">215 товаров</span>
+                    </a>
+                    
+                    <a href="#mobile" class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>Мобильные игры</h3>
+                        <span class="count">285 товаров</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Лента игр -->
+        <section class="games-feed" id="games">
+            <div class="container">
+                <h2 class="section-title">Топ игр</h2>
+                <div class="games-grid">
+                    <!-- Игра 1 -->
+                    <div class="game-card">
+                        <div class="game-image" style="background-image: url('img/fortnite.jpg');">
+                            <span class="price">899 ₽</span>
+                        </div>
+                        <div class="game-info">
+                            <h3>Fortnite</h3>
+                            <div class="game-meta">
+                                <span class="genre">Баттл-рояль</span>
+                                <span class="rating">★ 4.8</span>
+                            </div>
+                            <a href="product.html?id=fortnite" class="buy-btn">Купить сейчас</a>
+                        </div>
+                    </div>
+
+                    <!-- Игра 2 -->
+                    <div class="game-card">
+                        <div class="game-image" style="background-image: url('img/gta5.jpg');">
+                            <span class="price">1 499 ₽</span>
+                        </div>
+                        <div class="game-info">
+                            <h3>GTA 5</h3>
+                            <div class="game-meta">
+                                <span class="genre">Экшен</span>
+                                <span class="rating">★ 4.9</span>
+                            </div>
+                            <a href="product.html?id=gta5" class="buy-btn">Купить сейчас</a>
+                        </div>
+                    </div>
+
+                    <!-- Игра 3 -->
+                    <div class="game-card">
+                        <div class="game-image" style="background-image: url('img/csgo.jpg');">
+                            <span class="price">599 ₽</span>
+                        </div>
+                        <div class="game-info">
+                            <h3>CS:GO Prime</h3>
+                            <div class="game-meta">
+                                <span class="genre">Шутер</span>
+                                <span class="rating">★ 4.7</span>
+                            </div>
+                            <a href="product.html?id=csgo" class="buy-btn">Купить сейчас</a>
+                        </div>
+                    </div>
+
+                    <!-- Игра 4 -->
+                    <div class="game-card">
+                        <div class="game-image" style="background-image: url('img/minecraft.jpg');">
+                            <span class="price">1890 ₽</span>
+                        </div>
+                        <div class="game-info">
+                            <h3>Minecraft</h3>
+                            <div class="game-meta">
+                                <span class="genre">Песочница</span>
+                                <span class="rating">★ 4.8</span>
+                            </div>
+                            <a href="product.html?id=minecraft" class="buy-btn">Купить сейчас</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Аккаунты -->
+        <section class="accounts-section" id="accounts">
+            <div class="container">
+                <h2 class="section-title">Популярные аккаунты</h2>
+                <div class="accounts-grid">
+                    <div class="account-card">
+                        <div class="account-image" style="background-image: url('img/fortnite-account.jpg');"></div>
+                        <div class="account-info">
+                            <h3>Fortnite Аккаунт</h3>
+                            <div class="account-meta">
+                                <span>Уровень: 250</span>
+                                <span>Скины: 50+</span>
+                            </div>
+                            <div class="seller-info">
+                                <span class="seller-name">GameMaster</span>
+                                <span class="seller-rating">★★★★★ 4.9 (120)</span>
+                            </div>
+                            <div class="account-price">2 499 ₽</div>
+                            <a href="product.html?id=fortnite-account" class="buy-btn">Купить</a>
+                        </div>
+                    </div>
+
+                    <div class="account-card">
+                        <div class="account-image" style="background-image: url('img/gta-account.jpg');"></div>
+                        <div class="account-info">
+                            <h3>GTA 5 Аккаунт</h3>
+                            <div class="account-meta">
+                                <span>Уровень: 120</span>
+                                <span>Деньги: $50M</span>
+                            </div>
+                            <div class="seller-info">
+                                <span class="seller-name">RockstarPro</span>
+                                <span class="seller-rating">★★★★☆ 4.7 (89)</span>
+                            </div>
+                            <div class="account-price">3 999 ₽</div>
+                            <a href="product.html?id=gta-account" class="buy-btn">Купить</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="main-footer">
+        <div class="container">
+            <p>© 2025 IVSHOP. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

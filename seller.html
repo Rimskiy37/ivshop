@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IVSHOP - Продавец</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="dark-theme">
+    <header class="main-header">
+        <div class="container">
+            <div class="header-flex">
+                <a href="index.html" class="logo-link">
+                    <img src="img/logo.png" alt="IVSHOP" class="logo">
+                </a>
+                <div class="header-actions">
+                    <a href="balance.html" class="balance-link" id="header-balance">0 ₽</a>
+                    <a href="profile.html" class="user-profile">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <button id="theme-toggle" class="theme-btn">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="seller-page">
+            <div class="container">
+                <h1>Продавец</h1>
+                <p>Добавьте новый товар или отредактируйте существующий</p>
+
+                <form id="add-product-form" class="product-form">
+                    <h2>Добавить товар</h2>
+                    
+                    <div class="form-group">
+                        <label>Название товара</label>
+                        <input type="text" id="product-name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Цена (₽)</label>
+                        <input type="number" id="product-price" min="1" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Категория</label>
+                        <select id="product-category">
+                            <option value="Игры">Игры</option>
+                            <option value="Аккаунты">Аккаунты</option>
+                            <option value="Мобильные игры">Мобильные игры</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Описание</label>
+                        <textarea id="product-description" rows="4"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Ссылка на изображение</label>
+                        <input type="url" id="product-image" placeholder="https://...">
+                    </div>
+
+                    <button type="submit">Опубликовать товар</button>
+                </form>
+
+                <div class="commission-info">
+                    <h3>Комиссия платформы</h3>
+                    <p>Мы берём комиссию 5% с каждой продажи. Вы получаете 95% от цены товара.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

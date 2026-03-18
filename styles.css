@@ -1,0 +1,1863 @@
+/* Базовые стили */
+:root {
+    --primary-color: #2663f0;
+    --secondary-color: #4d8eff;
+    --dark-bg: #1e1e2e;
+    --dark-card: #2d2d44;
+    --light-bg: #f8f9fa;
+    --light-card: #ffffff;
+    --text-dark: #333;
+    --text-light: #f8f9fa;
+    --success-color: #00b894;
+    --warning-color: #fdcb6e;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: var(--dark-bg);
+    color: var(--text-light);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Тема */
+.dark-theme {
+    --bg-color: var(--dark-bg);
+    --card-color: var(--dark-card);
+    --text-color: var(--text-light);
+    background-color: var(--dark-bg);
+    color: var(--text-light);
+}
+
+.light-theme {
+    --bg-color: var(--light-bg);
+    --card-color: var(--light-card);
+    --text-color: var(--text-dark);
+    background-color: var(--light-bg);
+    color: var(--text-dark);
+}
+
+/* Шапка */
+.main-header {
+    background-color: var(--dark-card);
+    padding: 15px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-link {
+    display: inline-block;
+}
+
+.logo {
+    height: 40px;
+}
+
+.header-actions {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.user-profile {
+    color: var(--text-light);
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+.theme-btn {
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px;
+}
+
+/* Герой секция */
+.hero {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    padding: 60px 0;
+    color: white;
+    text-align: center;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.stars {
+    color: var(--warning-color);
+    font-size: 1.2rem;
+}
+
+.tagline {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* Категории */
+.categories-section {
+    padding: 40px 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.category-card {
+    background-color: var(--card-color);
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.category-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.count {
+    display: block;
+    color: var(--secondary-color);
+    margin-top: 5px;
+}
+
+/* Лента игр */
+.games-feed {
+    padding: 40px 0;
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.game-card {
+    background-color: var(--card-color);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.game-image {
+    height: 160px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.price {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.game-info {
+    padding: 20px;
+}
+
+.game-info h3 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.game-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+}
+
+.buy-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.buy-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Секция аккаунтов */
+.accounts-section {
+    padding: 40px 0;
+}
+
+.accounts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.account-card {
+    background-color: var(--card-color);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.account-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.account-image {
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+}
+
+.account-info {
+    padding: 15px;
+}
+
+.account-info h3 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.account-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+}
+
+.seller-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+.seller-name {
+    font-weight: bold;
+}
+
+.seller-rating {
+    color: var(--warning-color);
+}
+
+.account-price {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+/* Подвал */
+.main-footer {
+    background-color: var(--dark-card);
+    padding: 20px 0;
+    text-align: center;
+    margin-top: auto;
+}
+
+.main-footer p {
+    color: var(--text-color);
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+    
+    .categories-grid, .games-grid, .accounts-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Стили для страницы продукта */
+.product-section {
+    padding: 40px 0;
+    min-height: 70vh;
+}
+
+.product-container {
+    display: flex;
+    gap: 30px;
+    background-color: var(--card-color);
+    border-radius: 12px;
+    padding: 30px;
+}
+
+.product-image {
+    flex: 1;
+    min-height: 400px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+}
+
+.product-info {
+    flex: 1;
+}
+
+.product-title {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.product-seller {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.seller-rating {
+    color: var(--warning-color);
+}
+
+.product-price {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 20px 0;
+    color: var(--primary-color);
+}
+
+.product-description {
+    margin-bottom: 30px;
+    line-height: 1.7;
+}
+
+.purchase-form {
+    background-color: var(--bg-color);
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 30px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.purchase-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.purchase-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Стили для страницы профиля */
+.profile-section {
+    padding: 40px 0;
+    min-height: 70vh;
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.profile-header h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.profile-rating {
+    color: var(--warning-color);
+    margin-bottom: 10px;
+}
+
+.profile-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--secondary-color);
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.tab-button.active {
+    border-bottom-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.tab-content {
+    display: none;
+    padding: 20px 0;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.purchase-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: var(--card-color);
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.empty-message {
+    text-align: center;
+    color: var(--secondary-color);
+    padding: 30px 0;
+}
+
+.balance-section {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.balance-link {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.balance-link:hover {
+    background-color: var(--secondary-color);
+}
+
+.add-product {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.add-product:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Стили для страницы продавца */
+.seller-page {
+    padding: 40px 0;
+    min-height: 70vh;
+}
+
+.seller-page h1 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.seller-page p {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--secondary-color);
+}
+
+.product-form {
+    background-color: var(--card-color);
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.product-form h2 {
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+.product-form input,
+.product-form select,
+.product-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.product-form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.product-form button {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.product-form button:hover {
+    background-color: var(--secondary-color);
+}
+
+.commission-info {
+    margin-top: 30px;
+    text-align: center;
+    padding: 15px;
+    background-color: var(--card-color);
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 20px auto 0;
+}
+
+.commission-info h3 {
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+/* Стили для страницы баланса */
+.balance-page {
+    padding: 40px 0;
+    min-height: 70vh;
+}
+
+.balance-page h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.balance-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.balance-actions button {
+    padding: 12px 25px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.balance-actions button:hover {
+    background-color: var(--secondary-color);
+}
+
+.current-balance {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.current-balance h2 {
+    font-size: 1.5rem;
+}
+
+#balance-amount {
+    color: var(--primary-color);
+    font-size: 2rem;
+}
+
+.history {
+    background-color: var(--card-color);
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.history h2 {
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+.operation {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--bg-color);
+}
+
+/* Стили для страницы оплаты */
+.payment-section {
+    padding: 40px 0;
+    min-height: 70vh;
+}
+
+.payment-card {
+    background-color: var(--card-color);
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.payment-card h2 {
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--primary-color);
+}
+
+.payment-methods {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.method {
+    flex: 1;
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+    background-color: var(--bg-color);
+    cursor: pointer;
+    border: 1px solid var(--secondary-color);
+    transition: all 0.3s;
+}
+
+.method.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.method i {
+    display: block;
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.pay-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.pay-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Модальные окна */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    animation: fadeIn 0.3s;
+}
+
+.modal-content {
+    background-color: var(--card-color);
+    margin: 5% auto;
+    padding: 25px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+    animation: slideIn 0.3s;
+}
+
+.close-modal {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.close-modal:hover {
+    color: var(--primary-color);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Табы авторизации */
+.auth-tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--secondary-color);
+}
+
+.auth-tab {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.auth-tab.active {
+    border-bottom-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.auth-form {
+    display: none;
+}
+
+.auth-form.active {
+    display: block;
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s;
+}
+
+.auth-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Кнопки модальных окон */
+.purchase-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.confirm-btn {
+    flex: 1;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.confirm-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+.cancel-btn {
+    flex: 1;
+    padding: 12px;
+    background-color: var(--dark-card);
+    color: var(--text-color);
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cancel-btn:hover {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+/* Цвета для операций */
+.positive {
+    color: var(--success-color);
+    font-weight: bold;
+}
+
+.negative {
+    color: #ff4757;
+    font-weight: bold;
+}
+
+/* Адаптив для модальных окон */
+@media (max-width: 600px) {
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+    
+    .purchase-buttons {
+        flex-direction: column;
+    }
+}
+
+/* Кнопка выхода */
+.logout-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 15px;
+    transition: background-color 0.3s;
+  }
+  
+  .logout-btn:hover {
+    background-color: var(--secondary-color);
+  }
+  
+  .profile-actions {
+    margin-top: 15px;
+  }
+
+/* Стили для страницы авторизации */
+.auth-section {
+    padding: 40px 0;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+}
+
+.auth-card {
+    background-color: var(--card-color);
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 400px;
+    margin: 0 auto;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.auth-card h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s;
+}
+
+.auth-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+.auth-switch {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.auth-switch a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.auth-switch a:hover {
+    text-decoration: underline;
+}
+
+/* Аватарка */
+.avatar-container {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.avatar-container.large {
+    width: 100px;
+    height: 100px;
+    font-size: 2.5rem;
+    margin: 0 auto 15px;
+}
+
+.avatar-container i {
+    color: white;
+}
+
+/* Кнопка выхода */
+.logout-btn {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 8px 15px;
+    border-radius: 6px;
+    margin-right: 10px;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.logout-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Баланс */
+.balance-section {
+    background-color: var(--card-color);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.balance-section h2 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.balance-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.balance-actions button {
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.balance-actions button:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Модальные окна */
+.modal {
+    border: none;
+    border-radius: 12px;
+    padding: 0;
+    background-color: var(--card-color);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    animation: fadeIn 0.3s;
+}
+
+.modal::backdrop {
+    background-color: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+    padding: 25px;
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.payment-form {
+    margin-top: 20px;
+}
+
+.pay-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.pay-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Хедер */
+.header-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Добавить в конец файла */
+
+/* Стили для дат операций */
+.operation-date, .purchase-date {
+    font-size: 0.8rem;
+    color: var(--secondary-color);
+    margin-left: 10px;
+}
+
+/* Адаптив для страницы продукта */
+@media (max-width: 768px) {
+    .product-container {
+        flex-direction: column;
+    }
+    
+    .product-image {
+        min-height: 250px;
+    }
+}
+
+/* Стили для сообщений об ошибках */
+.error-message {
+    color: #ff4757;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    display: none;
+}
+
+/* Анимация загрузки */
+.loader {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top: 4px solid var(--primary-color);
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Стили для продавца */
+.seller-badge {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-left: 10px;
+}
+
+/* Улучшенные стили для форм */
+.form-group input:focus, 
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(38, 99, 240, 0.2);
+}
+
+/* Стили для кнопок */
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+button:disabled:hover {
+    background-color: var(--primary-color);
+}
+
+/* Дополнительные стили для модального окна покупки */
+.product-preview {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.preview-image {
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+}
+
+.preview-info {
+    flex: 1;
+}
+
+.preview-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-top: 5px;
+}
+
+/* Стили для кнопки выхода */
+.profile-actions {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.logout-btn {
+    background-color: #ff4757;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logout-btn:hover {
+    background-color: #e84118;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Адаптив для модальных окон */
+@media (max-width: 600px) {
+    .modal-content {
+        width: 95%;
+        padding: 15px;
+    }
+    
+    .payment-methods {
+        flex-direction: column;
+    }
+    
+    .method {
+        padding: 10px;
+    }
+}
+
+/* Улучшенные стили для форм */
+.form-group input:focus, 
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(38, 99, 240, 0.2);
+}
+
+/* Стили для ошибок */
+.error-message {
+    color: #ff4757;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    display: none;
+}
+
+/* Аватарка */
+.avatar-container {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.avatar-container.large {
+    width: 100px;
+    height: 100px;
+    font-size: 2.5rem;
+}
+
+.avatar-container i {
+    color: white;
+}
+
+/* Стили для модального окна покупки */
+#purchase-modal .modal-content {
+    max-width: 500px;
+    animation: fadeIn 0.3s;
+}
+
+.product-preview {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    align-items: center;
+    background-color: var(--card-color);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.preview-image {
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+}
+
+.preview-info {
+    flex: 1;
+}
+
+.preview-info h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.preview-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-top: 5px;
+}
+
+.purchase-info p {
+    margin: 20px 0;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.purchase-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.confirm-btn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.cancel-btn {
+    background-color: var(--dark-card);
+    color: var(--text-color);
+}
+
+.confirm-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+.cancel-btn:hover {
+    background-color: #555;
+}
+
+/* Исправленные стили для модального окна */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 1000;
+    animation: fadeIn 0.3s;
+}
+
+.modal-content {
+    background-color: var(--card-color);
+    margin: 5% auto;
+    padding: 25px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.close-modal {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-modal:hover {
+    color: var(--primary-color);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Стили для страницы подтверждения */
+.confirmation-section {
+    padding: 40px 0;
+    min-height: 70vh;
+}
+
+.confirmation-card {
+    background-color: var(--card-color);
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.confirmation-card h2 {
+    color: var(--primary-color);
+    margin-bottom: 30px;
+}
+
+.product-preview {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 30px;
+    background-color: var(--dark-card);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.preview-image {
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+}
+
+.confirmation-details {
+    text-align: left;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: var(--dark-card);
+    border-radius: 8px;
+}
+
+.confirmation-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.confirm-btn {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.confirm-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+.cancel-btn {
+    background-color: var(--dark-card);
+    color: var(--text-color);
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.cancel-btn:hover {
+    background-color: #333;
+}
+
+/* Убираем стандартные стили кнопок */
+button, input[type="submit"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+/* Стили для формы покупки */
+.purchase-form {
+    background-color: var(--card-color);
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.form-group input, 
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background-color: var(--dark-card);
+    color: var(--text-color);
+}
+
+.purchase-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: background-color 0.3s;
+}
+
+.purchase-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Стили для светлой темы */
+.light-theme .main-header {
+    background-color: var(--light-card);
+    color: var(--text-dark);
+}
+
+.light-theme .theme-btn {
+    color: var(--text-dark);
+}
+
+.light-theme .user-profile {
+    color: var(--text-dark);
+}
+
+/* Светлая тема для формы */
+.light-theme .purchase-form {
+    background-color: var(--light-card);
+    color: var(--text-dark);
+}
+
+.light-theme .purchase-form input,
+.light-theme .purchase-form select {
+    background-color: white;
+    color: var(--text-dark);
+    border: 1px solid #ddd;
+}
+
+
+/* Стили для полей ввода в формах */
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
+    background-color: var(--card-color);
+    color: var(--text-color);
+    transition: all 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(38, 99, 240, 0.2);
+}
+
+/* Стили для страницы авторизации */
+.auth-card input {
+    background-color: var(--dark-card);
+    color: var(--text-color);
+    border: 1px solid var(--secondary-color);
+}
+
+.light-theme .auth-card input {
+    background-color: white;
+    color: var(--text-dark);
+    border: 1px solid #ddd;
+}
+
+/* Стили для кнопки выхода */
+.logout-btn {
+    background-color: #ff4757;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logout-btn:hover {
+    background-color: #e84118;
+}
+
+.profile-actions {
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* Стили для payment-details */
+.payment-details {
+    background-color: var(--dark-card);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.light-theme .payment-details {
+    background-color: #f8f9fa;
+}
+
+/* Стили для страницы продукта */
+.product-section {
+    padding: 40px 0;
+    min-height: 70vh;
+}
+
+.product-container {
+    display: flex;
+    gap: 30px;
+}
+
+.product-image {
+    flex: 1;
+    min-height: 400px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.product-info {
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+    .product-container {
+        flex-direction: column;
+    }
+    
+    .product-image {
+        min-height: 250px;
+    }
+}
+
+/* Стили для светлой темы */
+.light-theme .product-description,
+.light-theme .purchase-section {
+    color: var(--text-dark);
+}
+
+.light-theme .purchase-section {
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Основные переменные */
+:root {
+    --shadow-dark: 0 4px 15px rgba(0,0,0,0.2);
+    --shadow-light: 0 4px 15px rgba(0,0,0,0.1);
+    --transition: all 0.3s ease;
+}
+
+.dark-theme {
+    --shadow: var(--shadow-dark);
+    --card-shadow: 0 4px 20px rgba(0,0,0,0.25);
+}
+
+.light-theme {
+    --shadow: var(--shadow-light);
+    --card-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+/* Общие стили для карточек */
+.purchase-section,
+.confirmation-card {
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+/* Кнопки во всех состояниях */
+.btn {
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* Баланс в шапке */
+.balance-link {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 12px;
+    background-color: var(--primary-color);
+    border-radius: 20px;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.balance-link:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.05);
+}
+
+/* Товары продавца в профиле */
+.product-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: var(--card-color);
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.product-item button {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px;
+    margin-left: 5px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.product-item button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Продажи */
+.sale-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: var(--card-color);
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* Кнопка "Стать продавцом" */
+.become-seller-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 20px 0;
+    transition: all 0.3s;
+}
+
+.become-seller-btn:hover:not(:disabled) {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+.become-seller-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Статус товара */
+.product-status {
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    background-color: var(--primary-color);
+    color: white;
+}

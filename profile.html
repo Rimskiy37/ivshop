@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IVSHOP - Профиль</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<style>
+    .logout-btn {
+        background-color: #ff4757;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .logout-btn:hover {
+        background-color: #e84118;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .profile-actions {
+        margin-top: 30px;
+        text-align: center;
+    }
+</style>
+
+<body class="dark-theme">
+    <header class="main-header">
+        <div class="container">
+            <div class="header-flex">
+                <a href="index.html" class="logo-link">
+                    <img src="img/logo.png" alt="IVSHOP" class="logo">
+                </a>
+                <div class="header-actions">
+                    <a href="balance.html" class="balance-link" id="header-balance">0 ₽</a>
+                    <button id="theme-toggle" class="theme-btn">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="profile-section">
+            <div class="container">
+                <div class="profile-header">
+                    <div class="avatar-container large">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h1 id="username">Загрузка...</h1>
+                    <div class="profile-rating">★★★★★ 5.0</div>
+                    <div class="profile-balance" id="profile-balance">0 ₽</div>   <!-- добавлено -->
+                    <div class="seller-request">
+                        <button id="become-seller-btn" class="seller-btn">Стать продавцом</button>
+                    </div>
+                </div>
+
+                <div class="profile-tabs">
+                    <button class="tab-button active" data-tab="purchases">Мои покупки</button>
+                    <button class="tab-button" data-tab="products">Мои товары</button>
+                    <button class="tab-button" data-tab="sales">Продажи</button>
+                </div>
+
+                <div id="purchases" class="tab-content active-tab">
+                    <div id="purchases-list">
+                        <p class="empty-message">Загрузка...</p>
+                    </div>
+                </div>
+
+                <div id="products" class="tab-content">
+                    <div id="seller-products-list">
+                        <p class="empty-message">У вас нет товаров</p>
+                    </div>
+                    <button class="add-product" onclick="location.href='seller.html'">➕ Выставить товар</button>
+                </div>
+
+                <div id="sales" class="tab-content">
+                    <div id="sales-list">
+                        <p class="empty-message">Продаж пока нет</p>
+                    </div>
+                </div>
+
+                <div class="profile-actions">
+                    <button class="logout-btn" id="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Выйти
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IVSHOP - Баланс</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="dark-theme">
+    <header class="main-header">
+        <div class="container">
+            <div class="header-flex">
+                <a href="index.html" class="logo-link">
+                    <img src="img/logo.png" alt="IVSHOP" class="logo">
+                </a>
+                <div class="header-actions">
+                    <a href="profile.html" class="user-profile">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <button id="theme-toggle" class="theme-btn">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="balance-page">
+            <div class="container">
+                <h1>Баланс</h1>
+                
+                <div class="balance-actions">
+                    <button onclick="showPaymentModal()">Пополнить</button>
+                    <button onclick="showWithdrawModal()">Вывести</button>
+                </div>
+
+                <div class="current-balance">
+                    <h2>Текущий баланс: <span id="balance-amount">0</span> ₽</h2>
+                </div>
+
+                <div class="history">
+                    <h2>История операций</h2>
+                    <div id="operations-list">
+                        <p class="empty-message">Загрузка...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="payment-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('payment-modal')">&times;</span>
+            <h2><i class="fas fa-wallet"></i> Пополнение баланса</h2>
+            
+            <div class="payment-methods">
+                <div class="method active" data-method="card" onclick="selectPaymentMethod('card')">
+                    <i class="fab fa-cc-visa"></i>
+                    <span>Банковская карта</span>
+                </div>
+                <div class="method" data-method="sbp" onclick="selectPaymentMethod('sbp')">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>СБП</span>
+                </div>
+                <div class="method" data-method="tinkoff" onclick="selectPaymentMethod('tinkoff')">
+                    <i class="fas fa-building"></i>
+                    <span>Тинькофф</span>
+                </div>
+            </div>
+
+            <div class="payment-form">
+                <div class="form-group">
+                    <label>Сумма пополнения (₽)</label>
+                    <input type="number" id="payment-amount" placeholder="1000" min="100" step="100">
+                </div>
+
+                <div id="card-details" class="payment-details">
+                    <div class="form-group">
+                        <label>Номер карты</label>
+                        <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Срок действия</label>
+                            <input type="text" id="card-expiry" placeholder="MM/ГГ" maxlength="5">
+                        </div>
+                        <div class="form-group">
+                            <label>CVV</label>
+                            <input type="text" id="card-cvv" placeholder="123" maxlength="3">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="sbp-details" class="payment-details" style="display: none;">
+                    <div class="form-group">
+                        <label>Номер телефона</label>
+                        <input type="text" id="sbp-phone" placeholder="+7 (XXX) XXX-XX-XX">
+                    </div>
+                </div>
+
+                <div id="tinkoff-details" class="payment-details" style="display: none;">
+                    <div class="form-group">
+                        <label>Номер счета Тинькофф</label>
+                        <input type="text" id="tinkoff-account" placeholder="XXXX XXXX XXXX XXXX">
+                    </div>
+                </div>
+
+                <button class="pay-btn" onclick="addBalance()">Пополнить баланс</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="withdraw-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('withdraw-modal')">&times;</span>
+            <h2><i class="fas fa-money-bill-wave"></i> Вывод средств</h2>
+            
+            <div class="payment-methods">
+                <div class="method active" data-method="card" onclick="selectWithdrawMethod('card')">
+                    <i class="fab fa-cc-visa"></i>
+                    <span>Банковская карта</span>
+                </div>
+                <div class="method" data-method="sbp" onclick="selectWithdrawMethod('sbp')">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>СБП</span>
+                </div>
+                <div class="method" data-method="tinkoff" onclick="selectWithdrawMethod('tinkoff')">
+                    <i class="fas fa-building"></i>
+                    <span>Тинькофф</span>
+                </div>
+            </div>
+
+            <div class="payment-form">
+                <div class="form-group">
+                    <label>Сумма вывода (₽)</label>
+                    <input type="number" id="withdraw-amount" placeholder="1000" min="100" step="100">
+                </div>
+
+                <div id="withdraw-card-details" class="payment-details">
+                    <div class="form-group">
+                        <label>Номер карты</label>
+                        <input type="text" id="withdraw-card-number" placeholder="1234 5678 9012 3456" maxlength="19">
+                    </div>
+                </div>
+
+                <div id="withdraw-sbp-details" class="payment-details" style="display: none;">
+                    <div class="form-group">
+                        <label>Номер телефона</label>
+                        <input type="text" id="withdraw-sbp-phone" placeholder="+7 (XXX) XXX-XX-XX">
+                    </div>
+                </div>
+
+                <div id="withdraw-tinkoff-details" class="payment-details" style="display: none;">
+                    <div class="form-group">
+                        <label>Номер счета Тинькофф</label>
+                        <input type="text" id="withdraw-tinkoff-account" placeholder="XXXX XXXX XXXX XXXX">
+                    </div>
+                </div>
+
+                <button class="pay-btn" onclick="withdrawBalance()">Вывести средства</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

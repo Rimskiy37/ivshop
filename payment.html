@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playerok - Пополнение баланса</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="dark-theme">
+    <!-- Шапка -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-flex">
+                <img src="img/logo.png" alt="Playerok" class="logo">
+                <div class="header-actions">
+                    <button id="theme-toggle" class="theme-btn">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main>
+        <section class="payment-section">
+            <div class="container">
+                <div class="payment-card">
+                    <h2><i class="fas fa-wallet"></i> Пополнение баланса</h2>
+                    
+                    <div class="payment-methods">
+                        <div class="method active">
+                            <i class="fab fa-cc-visa"></i>
+                            <span>Банковская карта</span>
+                        </div>
+                        <div class="method">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>СБП</span>
+                        </div>
+                        <div class="method">
+                            <i class="fas fa-building"></i>
+                            <span>Тинькофф</span>
+                        </div>
+                    </div>
+
+                    <div class="payment-form">
+                        <div class="form-group">
+                            <label>Сумма пополнения (₽)</label>
+                            <input type="number" placeholder="1000" min="100" step="100">
+                        </div>
+
+                        <div class="form-group card-details">
+                            <label>Номер карты</label>
+                            <input type="text" placeholder="1234 5678 9012 3456" maxlength="19">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Срок действия</label>
+                                <input type="text" placeholder="MM/ГГ" maxlength="5">
+                            </div>
+                            <div class="form-group">
+                                <label>CVV</label>
+                                <input type="text" placeholder="123" maxlength="3">
+                            </div>
+                        </div>
+
+                        <button class="pay-btn">Пополнить баланс</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

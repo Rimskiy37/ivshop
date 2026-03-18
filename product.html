@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IVSHOP - Покупка товара</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --input-bg-light: #ffffff;
+            --input-border-light: #dddddd;
+            --input-text-light: #333333;
+            --input-bg-dark: #2d2d44;
+            --input-border-dark: #4d8eff;
+            --input-text-dark: #f8f9fa;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .product-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .product-title {
+            font-size: 1.8rem;
+            margin: 0;
+            color: var(--primary-color);
+        }
+
+        .product-seller {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        .seller-name {
+            font-weight: bold;
+        }
+
+        .seller-rating {
+            color: var(--warning-color);
+        }
+
+        .product-price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 10px 0;
+        }
+
+        .product-description {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .purchase-section {
+            background-color: var(--card-color);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .purchase-section h3 {
+            margin: 0 0 15px 0;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group select,
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid var(--input-border);
+            background-color: var(--input-bg);
+            color: var(--input-text);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group select:focus,
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(38, 99, 240, 0.2);
+        }
+
+        .purchase-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        .purchase-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Стили для светлой темы */
+        .light-theme {
+            --input-bg: var(--input-bg-light);
+            --input-border: var(--input-border-light);
+            --input-text: var(--input-text-light);
+        }
+
+        /* Стили для темной темы */
+        .dark-theme {
+            --input-bg: var(--input-bg-dark);
+            --input-border: var(--input-border-dark);
+            --input-text: var(--input-text-dark);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .product-image {
+                height: 200px;
+            }
+        }
+
+        .purchase-section {
+            background-color: var(--card-color);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 1px solid var(--border-color);
+        }
+
+        .purchase-section h3 {
+            margin: 0 0 15px 0;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Переменные для границ */
+        :root {
+            --border-color-dark: #3a3a4a;
+            --border-color-light: #e0e0e0;
+        }
+
+        .dark-theme {
+            --border-color: var(--border-color-dark);
+        }
+
+        .light-theme {
+            --border-color: var(--border-color-light);
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    <header class="main-header">...</header>
+    <main>
+        <section class="product-section">
+            <div class="container">
+                <div class="product-container">
+                    <div class="product-image" id="product-image"></div>
+                    <div class="product-info">
+                        <h1 class="product-title" id="product-title"></h1>
+                        <div class="product-seller">
+                            <span class="seller-name" id="seller-name"></span>
+                            <span class="seller-rating" id="seller-rating"></span>
+                        </div>
+                        <div class="product-price" id="product-price"></div>
+                        <div class="product-description" id="product-description"></div>
+                        
+                        <form id="purchase-form" class="purchase-section">
+                            <h3>Оформление покупки</h3>
+                            <div class="form-group">
+                                <label>Способ оплаты</label>
+                                <select id="payment-type" required>
+                                    <option value="card">Банковская карта</option>
+                                    <option value="sbp">СБП</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Email для получения ключа</label>
+                                <input type="email" id="user-email" placeholder="Ваш email" required>
+                            </div>
+                            <button type="submit" class="purchase-btn">Купить сейчас</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
+</html>

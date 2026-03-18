@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IVSHOP - Авторизация</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="dark-theme">
+    <header class="main-header">
+        <div class="container">
+            <div class="header-flex">
+                <a href="index.html" class="logo-link">
+                    <img src="img/logo.png" alt="IVSHOP" class="logo">
+                </a>
+                <button id="theme-toggle" class="theme-btn">
+                    <i class="fas fa-sun"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="auth-section">
+            <div class="container">
+                <!-- Форма входа -->
+                <form id="login-form" class="auth-card">
+                    <h2>Вход в аккаунт</h2>
+                    <div class="form-group">
+                        <label>Никнейм</label>
+                        <input type="text" id="login-username" placeholder="Ваш никнейм" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Пароль</label>
+                        <input type="password" id="login-password" placeholder="Ваш пароль" required>
+                    </div>
+                    <button type="submit" class="auth-btn">Войти</button>
+                    <p class="auth-switch">Нет аккаунта? <a href="#" id="show-register">Зарегистрироваться</a></p>
+                </form>
+
+                <!-- Форма регистрации (скрыта по умолчанию) -->
+                <form id="register-form" class="auth-card" style="display: none;">
+                    <h2>Регистрация</h2>
+                    <div class="form-group">
+                        <label>Никнейм</label>
+                        <input type="text" id="register-username" placeholder="Придумайте никнейм" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="register-email" placeholder="Ваш email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Пароль</label>
+                        <input type="password" id="register-password" placeholder="Придумайте пароль" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Повторите пароль</label>
+                        <input type="password" id="register-password2" placeholder="Повторите пароль" required>
+                    </div>
+                    <button type="submit" class="auth-btn">Зарегистрироваться</button>
+                    <p class="auth-switch">Уже есть аккаунт? <a href="#" id="show-login">Войти</a></p>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

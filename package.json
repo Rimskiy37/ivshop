@@ -1,0 +1,17 @@
+{
+  "name": "ivshop",
+  "version": "1.0.0",
+  "description": "IVSHOP marketplace",
+  "main": "index.js",
+  "scripts": {
+    "vercel-build": "echo \"No build needed\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2"
+  }
+}
