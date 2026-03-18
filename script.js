@@ -602,22 +602,30 @@ function displayProduct(product) {
 
 // ------------------ ИГРЫ ------------------
 function renderProducts(products) {
+  // Ищем контейнер по ID
   const gamesGrid = document.getElementById('games-grid-container');
-  if (!gamesGrid) return;
+  if (!gamesGrid) {
+    console.log('Контейнер для игр не найден');
+    return;
+  }
   
+  // Фильтруем игры
   const games = products.filter(p => p.category === 'Игры');
+  console.log('Найдено игр:', games.length);
   
   if (games.length === 0) {
     gamesGrid.innerHTML = '<p class="empty-message">Игры скоро появятся</p>';
     return;
   }
   
-  gamesGrid.innerHTML = games.map(product => {
+  // Строим HTML
+  let html = '';
+  games.forEach(product => {
     const rating = (Math.random() * 1 + 4).toFixed(1);
     const reviews = Math.floor(Math.random() * 200) + 30;
     const sellerName = product.seller?.username || 'IVSHOP';
     
-    return `
+    html += `
       <div class="game-card" data-id="${product.id}">
         <div class="game-image" style="background-image: url('${product.image || 'img/default-game.jpg'}');">
           <span class="price">${product.price.toLocaleString('ru-RU')} ₽</span>
@@ -628,53 +636,65 @@ function renderProducts(products) {
             <span class="genre">${product.category || 'Игры'}</span>
             <span class="rating">★ ${rating} (${reviews})</span>
           </div>
-          <div class="seller-info" style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem;">
+          <div class="seller-info" style="display: flex; justify-content: space-between; margin: 10px 0; font-size: 0.9rem;">
             <span class="seller-name">${sellerName}</span>
-            <span class="seller-rating" style="color: var(--warning-color);">★★★★★ ${rating}</span>
+            <span class="seller-rating" style="color: #fdcb6e;">★★★★★ ${rating}</span>
           </div>
           <a href="product.html?id=${product.id}" class="buy-btn">Купить сейчас</a>
         </div>
       </div>
     `;
-  }).join('');
+  });
+  
+  gamesGrid.innerHTML = html;
 }
 
 // ------------------ АККАУНТЫ ------------------
 function renderAccounts(products) {
+  // Ищем контейнер по ID
   const accountsGrid = document.getElementById('accounts-grid-container');
-  if (!accountsGrid) return;
+  if (!accountsGrid) {
+    console.log('Контейнер для аккаунтов не найден');
+    return;
+  }
   
+  // Фильтруем аккаунты
   const accounts = products.filter(p => p.category === 'Аккаунты');
+  console.log('Найдено аккаунтов:', accounts.length);
   
   if (accounts.length === 0) {
     accountsGrid.innerHTML = '<p class="empty-message">Аккаунты скоро появятся</p>';
     return;
   }
   
-  accountsGrid.innerHTML = accounts.map(account => {
+  // Строим HTML
+  let html = '';
+  accounts.forEach(account => {
     const rating = (Math.random() * 0.5 + 4.5).toFixed(1);
     const reviews = Math.floor(Math.random() * 300) + 20;
     const sellerName = account.seller?.username || 'IVSHOP';
     
-    return `
+    html += `
       <div class="account-card">
         <div class="account-image" style="background-image: url('${account.image || 'img/default-account.jpg'}');"></div>
         <div class="account-info">
           <h3>${account.name}</h3>
-          <div class="account-meta">
+          <div class="account-meta" style="display: flex; justify-content: space-between; margin: 10px 0;">
             ${account.description ? `<span>${account.description.substring(0, 50)}${account.description.length > 50 ? '...' : ''}</span>` : '<span>Аккаунт</span>'}
             <span>⭐ ${rating} (${reviews})</span>
           </div>
-          <div class="seller-info">
+          <div class="seller-info" style="display: flex; justify-content: space-between; margin: 10px 0;">
             <span class="seller-name">${sellerName}</span>
-            <span class="seller-rating">★★★★★ ${rating}</span>
+            <span class="seller-rating" style="color: #fdcb6e;">★★★★★ ${rating}</span>
           </div>
-          <div class="account-price">${account.price.toLocaleString('ru-RU')} ₽</div>
-          <a href="product.html?id=${account.id}" class="buy-btn">Купить</a>
+          <div class="account-price" style="font-size: 1.3rem; font-weight: bold; color: var(--primary-color); text-align: right; margin: 10px 0;">${account.price.toLocaleString('ru-RU')} ₽</div>
+          <a href="product.html?id=${account.id}" class="buy-btn" style="display: block; text-align: center;">Купить</a>
         </div>
       </div>
     `;
-  }).join('');
+  });
+  
+  accountsGrid.innerHTML = html;
 }
 
 // ------------------ ПРОДАВЕЦ ------------------
