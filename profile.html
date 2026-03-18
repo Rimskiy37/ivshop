@@ -37,21 +37,28 @@
 </style>
 
 <body class="dark-theme">
-    <header class="main-header">
-        <div class="container">
-            <div class="header-flex">
-                <a href="index.html" class="logo-link">
-                    <img src="img/logo.png" alt="IVSHOP" class="logo">
-                </a>
-                <div class="header-actions">
-                    <a href="balance.html" class="balance-link" id="header-balance">0 ₽</a>
-                    <button id="theme-toggle" class="theme-btn">
-                        <i class="fas fa-sun"></i>
-                    </button>
-                </div>
-            </div>
+    <div class="profile-header">
+        <div class="avatar-container large">
+            <i class="fas fa-user"></i>
         </div>
-    </header>
+        <h1 id="username">Загрузка...</h1>
+        <div class="profile-rating">★★★★★ 5.0</div>
+        <div class="profile-balance" id="profile-balance" style="font-size: 1.5rem; color: var(--primary-color); margin: 10px 0;">0 ₽</div>
+        <div class="seller-request">
+            <button id="become-seller-btn" class="seller-btn" style="background-color: var(--primary-color); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.3s;">Стать продавцом</button>
+        </div>
+    </div>
+
+    
+    <!-- В табе "Мои товары" кнопка "Выставить товар" -->
+    <button class="add-product" onclick="location.href='seller.html'" style="background-color: var(--primary-color); color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 20px; transition: all 0.3s;">➕ Выставить товар</button>
+
+    <!-- Кнопка выхода -->
+    <div class="profile-actions">
+        <button class="logout-btn" id="logout-btn" style="background-color: #ff4757; color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-weight: bold; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s;">
+            <i class="fas fa-sign-out-alt"></i> Выйти
+        </button>
+    </div>
 
     <main>
         <section class="profile-section">

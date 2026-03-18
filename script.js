@@ -199,7 +199,6 @@ async function register(event) {
     }
 }
 
-// ------------------ ПРОФИЛЬ ------------------
 async function initProfilePage() {
   if (!token) {
     window.location.href = 'auth.html';
@@ -207,16 +206,28 @@ async function initProfilePage() {
   }
   
   try {
-    const res = await fetch(`/api/auth?type=me`, {  // ИСПРАВЛЕНО
+    const res = await fetch(`/api/auth?type=me`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     if (res.ok) {
       const data = await res.json();
       currentUser = data.user;
       document.getElementById('username').textContent = currentUser.username;
+      
+      // Обновляем баланс в профиле
       const profileBalanceEl = document.getElementById('profile-balance');
       if (profileBalanceEl) {
-        profileBalanceEl.textContent = currentUser.balance.toLocaleString('ru-RU') + ' ₽';
+        profileBalanceEl.textContent = (currentUser.balance || 0).toLocaleString('ru-RU') + ' ₽';
+      }
+      
+      // Если пользователь уже продавец или отправил заявку
+      const sellerBtn = document.getElementById('become-seller-btn');
+      if (currentUser.is_seller) {
+        sellerBtn.disabled = true;
+        sellerBtn.textContent = 'Вы продавец';
+      } else if (currentUser.seller_request) {
+        sellerBtn.disabled = true;
+        sellerBtn.textContent = 'Заявка отправлена';
       }
       
       loadPurchases();
@@ -233,6 +244,7 @@ async function initProfilePage() {
     console.error(err);
   }
   
+  // Обработчики табов
   document.querySelectorAll('.tab-button').forEach(btn => {
     btn.addEventListener('click', (e) => {
       document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
@@ -337,7 +349,10 @@ async function becomeSeller() {
     
     if (res.ok) {
       alert('Заявка на продавца отправлена!');
-      document.getElementById('become-seller-btn').disabled = true;
+      const btn = document.getElementById('become-seller-btn');
+      btn.disabled = true;
+      btn.textContent = 'Заявка отправлена';
+      btn.style.backgroundColor = 'var(--secondary-color)';
     } else {
       alert('Ошибка отправки заявки');
     }
@@ -586,23 +601,10 @@ function displayProduct(product) {
 }
 
 // ------------------ ИГРЫ ------------------
-async function loadProducts() {
-  try {
-    const res = await fetch(`/api/products`);
-    if (res.ok) {
-      const products = await res.json();
-      renderProducts(products);
-    }
-  } catch (err) {
-    console.error(err);
-  }
-}
-
 function renderProducts(products) {
   const gamesGrid = document.getElementById('games-grid-container');
   if (!gamesGrid) return;
   
-  // Фильтруем только игры (категория "Игры")
   const games = products.filter(p => p.category === 'Игры');
   
   if (games.length === 0) {
@@ -610,42 +612,38 @@ function renderProducts(products) {
     return;
   }
   
-  gamesGrid.innerHTML = games.map(product => `
-    <div class="game-card" data-id="${product.id}">
-      <div class="game-image" style="background-image: url('${product.image || 'img/default-game.jpg'}');">
-        <span class="price">${product.price.toLocaleString('ru-RU')} ₽</span>
-      </div>
-      <div class="game-info">
-        <h3>${product.name}</h3>
-        <div class="game-meta">          
-          <span class="seller-name">${product.seller?.username || 'IVSHOP'}</span>
-          <span class="genre">${product.category || 'Игры'}</span>
-          <span class="rating">★ 4.8 (${Math.floor(Math.random() * 200) + 50} отзывов)</span>
+  gamesGrid.innerHTML = games.map(product => {
+    const rating = (Math.random() * 1 + 4).toFixed(1);
+    const reviews = Math.floor(Math.random() * 200) + 30;
+    const sellerName = product.seller?.username || 'IVSHOP';
+    
+    return `
+      <div class="game-card" data-id="${product.id}">
+        <div class="game-image" style="background-image: url('${product.image || 'img/default-game.jpg'}');">
+          <span class="price">${product.price.toLocaleString('ru-RU')} ₽</span>
         </div>
-        <a href="product.html?id=${product.id}" class="buy-btn">Купить сейчас</a>
+        <div class="game-info">
+          <h3>${product.name}</h3>
+          <div class="game-meta">
+            <span class="genre">${product.category || 'Игры'}</span>
+            <span class="rating">★ ${rating} (${reviews})</span>
+          </div>
+          <div class="seller-info" style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem;">
+            <span class="seller-name">${sellerName}</span>
+            <span class="seller-rating" style="color: var(--warning-color);">★★★★★ ${rating}</span>
+          </div>
+          <a href="product.html?id=${product.id}" class="buy-btn">Купить сейчас</a>
+        </div>
       </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 }
 
 // ------------------ АККАУНТЫ ------------------
-async function loadAccounts() {
-  try {
-    const res = await fetch(`/api/products`);
-    if (res.ok) {
-      const products = await res.json();
-      renderAccounts(products);
-    }
-  } catch (err) {
-    console.error('Error loading accounts:', err);
-  }
-}
-
 function renderAccounts(products) {
   const accountsGrid = document.getElementById('accounts-grid-container');
   if (!accountsGrid) return;
   
-  // Фильтруем только аккаунты (категория "Аккаунты")
   const accounts = products.filter(p => p.category === 'Аккаунты');
   
   if (accounts.length === 0) {
@@ -653,24 +651,30 @@ function renderAccounts(products) {
     return;
   }
   
-  accountsGrid.innerHTML = accounts.map(account => `
-    <div class="account-card">
-      <div class="account-image" style="background-image: url('${account.image || 'img/default-account.jpg'}');"></div>
-      <div class="account-info">
-        <h3>${account.name}</h3>
-        <div class="account-meta">
-          ${account.description ? `<span>${account.description}</span>` : '<span>Аккаунт</span>'}
-          <span>⭐ ${(Math.random() * 1 + 4).toFixed(1)} (${Math.floor(Math.random() * 300) + 30})</span>
+  accountsGrid.innerHTML = accounts.map(account => {
+    const rating = (Math.random() * 0.5 + 4.5).toFixed(1);
+    const reviews = Math.floor(Math.random() * 300) + 20;
+    const sellerName = account.seller?.username || 'IVSHOP';
+    
+    return `
+      <div class="account-card">
+        <div class="account-image" style="background-image: url('${account.image || 'img/default-account.jpg'}');"></div>
+        <div class="account-info">
+          <h3>${account.name}</h3>
+          <div class="account-meta">
+            ${account.description ? `<span>${account.description.substring(0, 50)}${account.description.length > 50 ? '...' : ''}</span>` : '<span>Аккаунт</span>'}
+            <span>⭐ ${rating} (${reviews})</span>
+          </div>
+          <div class="seller-info">
+            <span class="seller-name">${sellerName}</span>
+            <span class="seller-rating">★★★★★ ${rating}</span>
+          </div>
+          <div class="account-price">${account.price.toLocaleString('ru-RU')} ₽</div>
+          <a href="product.html?id=${account.id}" class="buy-btn">Купить</a>
         </div>
-        <div class="seller-info">
-          <span class="seller-name">${account.seller?.username || 'IVSHOP'}</span>
-          <span class="seller-rating">★★★★★ ${(Math.random() * 0.5 + 4.5).toFixed(1)}</span>
-        </div>
-        <div class="account-price">${account.price.toLocaleString('ru-RU')} ₽</div>
-        <a href="product.html?id=${account.id}" class="buy-btn">Купить</a>
       </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 }
 
 // ------------------ ПРОДАВЕЦ ------------------
