@@ -9,6 +9,15 @@
 </head>
 
 <style>
+    /* ИСПРАВЛЕНО: класс .active (не .active-tab) для работы с JS */
+    .tab-content {
+        display: none;
+        padding: 20px 0;
+    }
+    .tab-content.active {
+        display: block;
+    }
+
     .logout-btn {
         background-color: #ff4757;
         color: white;
@@ -23,13 +32,11 @@
         gap: 8px;
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-
     .logout-btn:hover {
         background-color: #e84118;
         transform: translateY(-2px);
         box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
-
     .profile-actions {
         margin-top: 30px;
         text-align: center;
@@ -62,7 +69,7 @@
                     </div>
                     <h1 id="username">Загрузка...</h1>
                     <div class="profile-rating">★★★★★ 5.0</div>
-                    <div class="profile-balance" id="profile-balance">0 ₽</div>   <!-- добавлено -->
+                    <div class="profile-balance" id="profile-balance">0 ₽</div>
                     <div class="seller-request">
                         <button id="become-seller-btn" class="seller-btn">Стать продавцом</button>
                     </div>
@@ -74,7 +81,8 @@
                     <button class="tab-button" data-tab="sales">Продажи</button>
                 </div>
 
-                <div id="purchases" class="tab-content active-tab">
+                <!-- ИСПРАВЛЕНО: класс active вместо active-tab -->
+                <div id="purchases" class="tab-content active">
                     <div id="purchases-list">
                         <p class="empty-message">Загрузка...</p>
                     </div>

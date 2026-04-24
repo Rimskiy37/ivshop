@@ -3,17 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Playerok - Пополнение баланса</title>
+    <!-- ИСПРАВЛЕНО: было "Playerok - Пополнение баланса" -->
+    <title>IVSHOP - Пополнение баланса</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body class="dark-theme">
-    <!-- Шапка -->
+    <!-- ИСПРАВЛЕНО: добавлена ссылка на логотип и правильный alt -->
     <header class="main-header">
         <div class="container">
             <div class="header-flex">
-                <img src="img/logo.png" alt="Playerok" class="logo">
+                <a href="index.html" class="logo-link">
+                    <img src="img/logo.png" alt="IVSHOP" class="logo">
+                </a>
                 <div class="header-actions">
+                    <a href="balance.html" class="balance-link" id="header-balance">0 ₽</a>
+                    <a href="profile.html" class="user-profile">
+                        <i class="fas fa-user"></i>
+                    </a>
                     <button id="theme-toggle" class="theme-btn">
                         <i class="fas fa-sun"></i>
                     </button>
@@ -22,23 +29,23 @@
         </div>
     </header>
 
-    <!-- Основной контент -->
     <main>
         <section class="payment-section">
             <div class="container">
                 <div class="payment-card">
                     <h2><i class="fas fa-wallet"></i> Пополнение баланса</h2>
-                    
+
+                    <!-- ИСПРАВЛЕНО: добавлены data-method и onclick для переключения -->
                     <div class="payment-methods">
-                        <div class="method active">
+                        <div class="method active" data-method="card" onclick="selectMethod('card')">
                             <i class="fab fa-cc-visa"></i>
                             <span>Банковская карта</span>
                         </div>
-                        <div class="method">
+                        <div class="method" data-method="sbp" onclick="selectMethod('sbp')">
                             <i class="fas fa-mobile-alt"></i>
                             <span>СБП</span>
                         </div>
-                        <div class="method">
+                        <div class="method" data-method="tinkoff" onclick="selectMethod('tinkoff')">
                             <i class="fas fa-building"></i>
                             <span>Тинькофф</span>
                         </div>
@@ -47,26 +54,59 @@
                     <div class="payment-form">
                         <div class="form-group">
                             <label>Сумма пополнения (₽)</label>
-                            <input type="number" placeholder="1000" min="100" step="100">
+                            <!-- ИСПРАВЛЕНО: добавлен id для JS -->
+                            <input type="number" id="page-amount" placeholder="1000" min="100" step="100">
                         </div>
 
-                        <div class="form-group card-details">
-                            <label>Номер карты</label>
-                            <input type="text" placeholder="1234 5678 9012 3456" maxlength="19">
-                        </div>
-
-                        <div class="form-row">
+                        <!-- Детали карты -->
+                        <div id="page-card-details" class="payment-details">
                             <div class="form-group">
-                                <label>Срок действия</label>
-                                <input type="text" placeholder="MM/ГГ" maxlength="5">
+                                <label>Номер карты</label>
+                                <!-- ИСПРАВЛЕНО: добавлен id, тип text (не number) для маски -->
+                                <input type="text" id="page-card-number"
+                                    placeholder="1234 5678 9012 3456" maxlength="19"
+                                    inputmode="numeric">
                             </div>
-                            <div class="form-group">
-                                <label>CVV</label>
-                                <input type="text" placeholder="123" maxlength="3">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Срок действия</label>
+                                    <input type="text" id="page-card-expiry"
+                                        placeholder="MM/ГГ" maxlength="5"
+                                        inputmode="numeric">
+                                </div>
+                                <div class="form-group">
+                                    <label>CVV</label>
+                                    <input type="text" id="page-card-cvv"
+                                        placeholder="123" maxlength="3"
+                                        inputmode="numeric">
+                                </div>
                             </div>
                         </div>
 
-                        <button class="pay-btn">Пополнить баланс</button>
+                        <!-- Детали СБП -->
+                        <div id="page-sbp-details" class="payment-details" style="display:none;">
+                            <div class="form-group">
+                                <label>Номер телефона</label>
+                                <input type="text" id="page-sbp-phone"
+                                    placeholder="+7 (XXX) XXX-XX-XX"
+                                    inputmode="tel">
+                            </div>
+                        </div>
+
+                        <!-- Детали Тинькофф -->
+                        <div id="page-tinkoff-details" class="payment-details" style="display:none;">
+                            <div class="form-group">
+                                <label>Номер счёта Тинькофф</label>
+                                <input type="text" id="page-tinkoff-account"
+                                    placeholder="XXXX XXXX XXXX XXXX"
+                                    maxlength="19" inputmode="numeric">
+                            </div>
+                        </div>
+
+                        <!-- ИСПРАВЛЕНО: кнопка подключена к JS-функции -->
+                        <button class="pay-btn" onclick="submitPagePayment()">
+                            Пополнить баланс
+                        </button>
                     </div>
                 </div>
             </div>
@@ -74,5 +114,120 @@
     </main>
 
     <script src="script.js"></script>
+    <script>
+        // Переключение методов оплаты на этой странице
+        function selectMethod(method) {
+            document.querySelectorAll('.payment-methods .method')
+                .forEach(m => m.classList.remove('active'));
+            document.querySelector(`.method[data-method="${method}"]`).classList.add('active');
+
+            ['card', 'sbp', 'tinkoff'].forEach(m => {
+                const el = document.getElementById(`page-${m}-details`);
+                if (el) el.style.display = (m === method) ? 'block' : 'none';
+            });
+        }
+
+        // Маски для полей
+        document.addEventListener('DOMContentLoaded', () => {
+            const cardEl = document.getElementById('page-card-number');
+            if (cardEl) {
+                cardEl.addEventListener('input', function () {
+                    let v = this.value.replace(/\D/g, '').slice(0, 16);
+                    this.value = v.replace(/(.{4})/g, '$1 ').trim();
+                });
+                cardEl.addEventListener('keypress', e => { if (!/\d/.test(e.key)) e.preventDefault(); });
+            }
+            const expEl = document.getElementById('page-card-expiry');
+            if (expEl) {
+                expEl.addEventListener('input', function () {
+                    let v = this.value.replace(/\D/g, '').slice(0, 4);
+                    if (v.length >= 3) v = v.slice(0, 2) + '/' + v.slice(2);
+                    this.value = v;
+                });
+                expEl.addEventListener('keypress', e => { if (!/\d/.test(e.key)) e.preventDefault(); });
+            }
+            const cvvEl = document.getElementById('page-card-cvv');
+            if (cvvEl) {
+                cvvEl.addEventListener('input', function () {
+                    this.value = this.value.replace(/\D/g, '').slice(0, 3);
+                });
+                cvvEl.addEventListener('keypress', e => { if (!/\d/.test(e.key)) e.preventDefault(); });
+            }
+            const phoneEl = document.getElementById('page-sbp-phone');
+            if (phoneEl) {
+                phoneEl.addEventListener('input', function () {
+                    let v = this.value.replace(/[^\d+]/g, '');
+                    if (v && v[0] !== '+') v = '+' + v;
+                    this.value = v.slice(0, 12);
+                });
+            }
+            const tinkEl = document.getElementById('page-tinkoff-account');
+            if (tinkEl) {
+                tinkEl.addEventListener('input', function () {
+                    let v = this.value.replace(/\D/g, '').slice(0, 16);
+                    this.value = v.replace(/(.{4})/g, '$1 ').trim();
+                });
+                tinkEl.addEventListener('keypress', e => { if (!/\d/.test(e.key)) e.preventDefault(); });
+            }
+        });
+
+        async function submitPagePayment() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                showNotification('Войдите в аккаунт', 'warning');
+                setTimeout(() => window.location.href = 'auth.html', 1500);
+                return;
+            }
+
+            const amountRaw = document.getElementById('page-amount').value;
+            const amount = parseInt(amountRaw, 10);
+            if (!amountRaw || isNaN(amount) || amount < 100) {
+                showNotification('Минимальная сумма — 100 ₽', 'error');
+                return;
+            }
+
+            const activeMethod = document.querySelector('.method.active')?.dataset.method || 'card';
+
+            if (activeMethod === 'card') {
+                const cardNum = document.getElementById('page-card-number').value.replace(/\s/g, '');
+                const expiry  = document.getElementById('page-card-expiry').value;
+                const cvv     = document.getElementById('page-card-cvv').value;
+                if (cardNum.length !== 16) {
+                    showNotification('Введите 16 цифр номера карты', 'error'); return;
+                }
+                if (!/^\d{2}\/\d{2}$/.test(expiry)) {
+                    showNotification('Срок действия: MM/ГГ', 'error'); return;
+                }
+                if (cvv.length !== 3) {
+                    showNotification('CVV — 3 цифры', 'error'); return;
+                }
+            } else if (activeMethod === 'sbp') {
+                const phone = document.getElementById('page-sbp-phone').value.replace(/\D/g, '');
+                if (phone.length < 10) {
+                    showNotification('Введите корректный номер телефона', 'error'); return;
+                }
+            }
+
+            try {
+                const res = await fetch('/api/balance?type=deposit', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ amount })
+                });
+                if (res.ok) {
+                    showNotification(`Баланс пополнен на ${amount.toLocaleString('ru-RU')} ₽`, 'success');
+                    setTimeout(() => window.location.href = 'balance.html', 1800);
+                } else {
+                    const err = await res.json();
+                    showNotification(err.error || 'Ошибка пополнения', 'error');
+                }
+            } catch (e) {
+                showNotification('Ошибка соединения', 'error');
+            }
+        }
+    </script>
 </body>
 </html>
