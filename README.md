@@ -36,6 +36,7 @@ IVSHOP — это платформа, где пользователи могут
 | Хеширование паролей | bcryptjs |
 | Хостинг | Vercel |
 | Репозиторий | GitHub |
+| Тестирование | Jest 29 |
 
 ---
 
@@ -55,6 +56,18 @@ ivshop/
 ├── vercel.json         — Конфигурация Vercel
 ├── package.json        — Зависимости Node.js
 ├── img/                — Изображения товаров и логотип
+├── tests/
+│   ├── unit/
+│   │   ├── auth.test.js           — JWT, bcrypt, методы запросов
+│   │   ├── verifyToken.test.js    — Функция проверки токена
+│   │   ├── balance.test.js        — Арифметика пополнения и вывода
+│   │   └── purchases.test.js      — Комиссия 5%, логика покупок
+│   ├── integration/
+│   │   └── api.integration.test.js — Полные API-сценарии (mock БД)
+│   ├── e2e/
+│   │   └── scenarios.test.js      — Сквозные пользовательские сценарии
+│   └── security/
+│       └── security.test.js       — Безопасность: JWT, XSS, CORS
 └── api/
     ├── auth.js                  — Регистрация и вход (POST /api/auth)
     ├── balance.js               — Баланс и операции (GET/POST /api/balance)
@@ -80,6 +93,51 @@ ivshop/
 - **products** — товары (id, seller_id, name, description, price, category, image, status)
 - **purchases** — покупки (id, product_id, buyer_id, seller_id, amount, date, email, payment_method)
 - **operations** — история операций с балансом (id, user_id, type, amount, date, details)
+
+---
+
+## Тестирование
+
+Проект покрыт **82 автоматическими тестами** на фреймворке Jest. Тесты не обращаются к реальной базе данных — используется mock-хранилище.
+
+### Виды тестов
+
+| Вид | Папка | Тестов | Что проверяет |
+|-----|-------|--------|---------------|
+| Юнит | `tests/unit/` | 38 | JWT, bcrypt, арифметика баланса, расчёт комиссии |
+| Интеграционные | `tests/integration/` | 24 | Полные API-сценарии от запроса до ответа |
+| E2E | `tests/e2e/` | 8 | Сквозные сценарии: регистрация → покупка → история |
+| Безопасность | `tests/security/` | 12 | SQL-инъекции, XSS, подделка токенов, CORS |
+
+### Запуск тестов
+
+```bash
+# Все тесты
+npx jest --verbose
+
+# Только юнит-тесты
+npm run test:unit
+
+# Только интеграционные
+npm run test:integration
+
+# Только E2E
+npm run test:e2e
+
+# Только тесты безопасности
+npm run test:security
+
+# С отчётом о покрытии кода
+npm run test:coverage
+```
+
+### Результат
+
+```
+Test Suites: 7 passed, 7 total
+Tests:       82 passed, 82 total
+Time:        ~9s
+```
 
 ---
 
