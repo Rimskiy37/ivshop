@@ -1,0 +1,38 @@
+{
+  "name": "ivshop",
+  "version": "1.0.0",
+  "description": "IVSHOP — веб-маркетплейс игровых цифровых товаров. Курсовой проект, Бабуров И.Д., гр. 3993",
+  "main": "index.js",
+  "scripts": {
+    "vercel-build": "echo \"No build needed\"",
+    "test": "jest --verbose",
+    "test:unit": "jest tests/unit --verbose",
+    "test:integration": "jest tests/integration --verbose",
+    "test:e2e": "jest tests/e2e --verbose",
+    "test:security": "jest tests/security --verbose",
+    "test:coverage": "jest --coverage --verbose",
+    "test:watch": "jest --watch"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/tests/**/*.test.js"
+    ],
+    "collectCoverageFrom": [
+      "api/**/*.js"
+    ],
+    "coverageReporters": ["text", "lcov", "html"],
+    "testTimeout": 10000
+  },
+  "keywords": ["marketplace", "gaming", "nodejs", "vercel", "supabase"],
+  "author": "Бабуров Иван Дмитриевич",
+  "license": "ISC",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
